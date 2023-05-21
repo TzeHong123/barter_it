@@ -20,8 +20,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController _passEditingController = TextEditingController();
   final TextEditingController _pass2EditingController = TextEditingController();
   bool _isChecked = false;
+  bool _isObscure = true;
+  bool _isObscure1 = true;
   final _formKey = GlobalKey<FormState>();
   late double screenHeight, screenWidth, cardwitdh;
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscure = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +118,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             validator: (val) => val!.isEmpty || (val.length < 5)
                                 ? "password must be longer than 5"
                                 : null,
-                            obscureText: true,
-                            decoration: const InputDecoration(
+                            obscureText: _isObscure,
+                            decoration: InputDecoration(
                                 labelText: 'Password',
                                 labelStyle: TextStyle(),
                                 icon: Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: Icon(_isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        _isObscure = !_isObscure;
+                                      },
+                                    );
+                                  },
+                                ),
+                                alignLabelWithHint: false,
+                                filled: false,
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(width: 2.0),
                                 ))),
@@ -123,11 +145,25 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             validator: (val) => val!.isEmpty || (val.length < 5)
                                 ? "password must be longer than 5"
                                 : null,
-                            obscureText: true,
-                            decoration: const InputDecoration(
+                            obscureText: _isObscure1,
+                            decoration: InputDecoration(
                                 labelText: 'Re-enter password',
                                 labelStyle: TextStyle(),
                                 icon: Icon(Icons.lock),
+                                suffixIcon: IconButton(
+                                  icon: Icon(_isObscure1
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        _isObscure1 = !_isObscure1;
+                                      },
+                                    );
+                                  },
+                                ),
+                                alignLabelWithHint: false,
+                                filled: false,
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(width: 2.0),
                                 ))),
