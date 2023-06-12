@@ -97,16 +97,11 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
       body: Column(children: [
         Flexible(
           flex: 4,
-          // height: screenHeight / 2.5,
-          // width: screenWidth,
           child: GestureDetector(
               onTap: () {
                 _selectFromCamera();
               },
-              child: /*Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                  child: */
-                  Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -133,20 +128,7 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
                   const SizedBox(height: 32),
                   buildIndicator(),
                 ],
-              )
-              /*child: Card(
-                  child: Container(
-                      width: screenWidth,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: _image == null
-                              ? AssetImage(pathAsset)
-                              : FileImage(_image!) as ImageProvider,
-                          fit: BoxFit.contain,
-                        ),
-                      )),
-                ),*/
-              ),
+              )),
         ),
         Expanded(
           flex: 6,
@@ -183,24 +165,6 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
                             }).toList(),
                           ),
                         ),
-                        /*Expanded(
-                          child: TextFormField(
-                              textInputAction: TextInputAction.next,
-                              validator: (val) =>
-                                  val!.isEmpty || (val.length < 3)
-                                      ? "Item name must be longer than 3"
-                                      : null,
-                              onFieldSubmitted: (v) {},
-                              controller: _itemnameEditingController,
-                              keyboardType: TextInputType.text,
-                              decoration: const InputDecoration(
-                                  labelText: 'Item Name',
-                                  labelStyle: TextStyle(),
-                                  icon: Icon(Icons.abc),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(width: 2.0),
-                                  ))),
-                        )*/
                       ],
                     ),
                     TextFormField(
@@ -422,7 +386,6 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
               onPressed: () {
                 Navigator.of(context).pop();
                 insertItem();
-                //registerUser();
               },
             ),
             TextButton(
@@ -504,7 +467,6 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
     _currentPosition = await Geolocator.getCurrentPosition();
 
     _getAddress(_currentPosition);
-    //return await Geolocator.getCurrentPosition();
   }
 
   _getAddress(Position pos) async {
