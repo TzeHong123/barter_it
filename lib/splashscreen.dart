@@ -22,7 +22,7 @@ class SplashScreenState extends State<SplashScreen> {
     //checkAndLogin();
     //loadPref();
     Timer(
-        const Duration(seconds: 3),
+        const Duration(seconds: 5),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (content) => LoginScreen())));
   }
@@ -52,7 +52,7 @@ class SplashScreenState extends State<SplashScreen> {
               ),
               const CircularProgressIndicator(),
               const Text(
-                "Version 0.1",
+                "Version 1.1",
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -101,7 +101,7 @@ class SplashScreenState extends State<SplashScreen> {
         }).timeout(const Duration(seconds: 5), onTimeout: () {
           // Time has run out, do what you wanted to do.
         });
-      } on TimeoutException catch (_) {
+      } on TimeoutException item (_) {
         print("Time out");
       }
     } else {

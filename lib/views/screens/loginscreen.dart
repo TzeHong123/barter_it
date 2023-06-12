@@ -222,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
             print(user.name);
             print(user.email);
             ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("Login Success")));
+                .showSnackBar(const SnackBar(content: Text("Login Success!")));
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -231,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         )));
           } else {
             ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("Login Failed")));
+                .showSnackBar(const SnackBar(content: Text("Login Failed!")));
           }
         }
       }).timeout(const Duration(seconds: 5), onTimeout: () {
@@ -264,7 +264,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.setString('pass', password);
       await prefs.setBool("checkbox", value);
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Preferences Stored")));
+          .showSnackBar(const SnackBar(content: Text("Preferences Stored!")));
     } else {
       //delete preference
       await prefs.setString('email', '');
@@ -276,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _isChecked = false;
       });
       ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Preferences Removed")));
+          .showSnackBar(const SnackBar(content: Text("Preferences Removed!")));
     }
   }
 

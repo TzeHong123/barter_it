@@ -41,6 +41,15 @@ dependencies:
   shared_preferences: ^2.1.1
   image_picker: ^0.8.7+5
   image_cropper: ^4.0.1
+  cached_network_image: ^3.2.3
+  intl: ^0.18.1
+  geocoding: ^2.1.0
+  geolocator: ^9.0.2
+  carousel_slider: ^4.2.1
+  smooth_page_indicator: ^1.1.0
+  fluttertoast: ^8.2.2
+  cool_alert: ^2.0.1
+  flutter_staggered_grid_view: ^0.6.2
 
 dev_dependencies:
   flutter_test:
