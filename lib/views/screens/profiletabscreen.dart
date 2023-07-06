@@ -54,19 +54,19 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
                     "assets/images/profile.png",
                   ),
                 ),
-                Expanded(
-                    flex: 6,
-                    child: Column(
-                      children: [
-                        Text(
-                          widget.user.name.toString(),
-                          style: const TextStyle(fontSize: 24),
-                        ),
-                        Text(widget.user.email.toString()),
-                        Text(widget.user.phone.toString()),
-                        Text(widget.user.datereg.toString()),
-                      ],
-                    )),
+                // Expanded(
+                //     flex: 6,
+                //     child: Column(
+                //       children: [
+                //         Text(
+                //           widget.user.name.toString(),
+                //           style: const TextStyle(fontSize: 24),
+                //         ),
+                //         Text(widget.user.email.toString()),
+                //         Text(widget.user.phone.toString()),
+                //         Text(widget.user.datereg.toString()),
+                //       ],
+                //     )),
               ]),
             ),
           ),

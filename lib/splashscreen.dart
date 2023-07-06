@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:barter_it/views/screens/loginscreen.dart';
@@ -52,7 +54,7 @@ class SplashScreenState extends State<SplashScreen> {
               ),
               const CircularProgressIndicator(),
               const Text(
-                "Version 1.1",
+                "Version 1.2",
                 style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

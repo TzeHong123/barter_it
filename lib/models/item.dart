@@ -3,6 +3,7 @@ class Item {
   String? userId;
   String? itemName;
   String? itemDesc;
+  //String? itemPrice;
   String? itemType;
   String? itemQty;
   String? itemLat;
@@ -17,6 +18,7 @@ class Item {
       this.itemName,
       this.itemType,
       this.itemDesc,
+      //this.itemPrice,
       this.itemQty,
       this.itemLat,
       this.itemLong,
@@ -29,6 +31,7 @@ class Item {
     userId = json['user_id'];
     itemName = json['item_name'];
     itemDesc = json['item_desc'];
+    //itemPrice = json['item_price'];
     itemType = json['item_type'];
     itemQty = json['item_qty'];
     itemLat = json['item_lat'];
@@ -44,6 +47,7 @@ class Item {
     data['user_id'] = userId;
     data['item_name'] = itemName;
     data['item_desc'] = itemDesc;
+    //data['item_price'] = itemPrice;
     data['item_type'] = itemType;
     data['item_qty'] = itemQty;
     data['item_lat'] = itemLat;

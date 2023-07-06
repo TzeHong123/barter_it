@@ -53,7 +53,7 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
     "Kitchen utensils",
     "Smartphone",
     "Tablet",
-    "Miscellaneous",
+    "Laptop",
     "Other",
   ];
 
@@ -477,14 +477,16 @@ class _AddNewItemscreenState extends State<AddNewItemscreen> {
       _prstateEditingController.text = "Perak";
       prlat = "4.597479";
       prlong = "101.090106";
+      setState(() {});
     } else {
       _prlocalEditingController.text = placemarks[0].locality.toString();
       _prstateEditingController.text =
           placemarks[0].administrativeArea.toString();
       prlat = _currentPosition.latitude.toString();
       prlong = _currentPosition.longitude.toString();
+      setState(() {});
     }
-    setState(() {});
+    //setState(() {});
   }
 
   Widget buildImage(String displayImage, int index) => Container(

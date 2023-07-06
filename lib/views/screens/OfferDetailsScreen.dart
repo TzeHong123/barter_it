@@ -102,6 +102,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                     ),
                   )
                 ]),
+                /*
                 TableRow(children: [
                   const TableCell(
                     child: Text(
@@ -109,12 +110,12 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  /*TableCell(
+                  TableCell(
                     child: Text(
                       "RM ${double.parse(widget.useritem.itemPrice.toString()).toStringAsFixed(2)}",
                     ),
-                  )*/
-                ]),
+                  )
+                ]),*/
                 TableRow(children: [
                   const TableCell(
                     child: Text(

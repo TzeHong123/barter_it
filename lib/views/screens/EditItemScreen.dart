@@ -44,7 +44,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
     "Kitchen utensils",
     "Smartphone",
     "Tablet",
-    "Miscellaneous",
+    "Laptop",
     "Other",
   ];
 
@@ -59,7 +59,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
     _itemnameEditingController.text = widget.useritem.itemName.toString();
     _itemdescEditingController.text = widget.useritem.itemDesc.toString();
     //_itempriceEditingController.text =
-    //   double.parse(widget.itemcatch.catchPrice.toString()).toStringAsFixed(2);
+    //    double.parse(widget.useritem.itemPrice.toString()).toStringAsFixed(2);
     _itemqtyEditingController.text = widget.useritem.itemQty.toString();
     _prstateEditingController.text = widget.useritem.itemState.toString();
     _prlocalEditingController.text = widget.useritem.itemLocality.toString();
@@ -176,7 +176,8 @@ class _EditItemScreenState extends State<EditItemScreen> {
                             ))),
                     Row(
                       children: [
-                        /*Flexible(
+                        /*
+                        Flexible(
                           flex: 5,
                           child: TextFormField(
                               textInputAction: TextInputAction.next,

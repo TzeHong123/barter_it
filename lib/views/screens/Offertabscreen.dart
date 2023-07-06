@@ -55,12 +55,12 @@ class _OfferTabScreenState extends State<OfferTabScreen> {
         title: Text(
           maintitle,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 28,
             color: Colors.white,
             //fontStyle: FontStyle.italic,
           ),
-          strutStyle: StrutStyle(fontWeight: FontWeight.bold),
+          strutStyle: const StrutStyle(fontWeight: FontWeight.bold),
         ),
       ),
       body: itemList.isEmpty
@@ -74,7 +74,7 @@ class _OfferTabScreenState extends State<OfferTabScreen> {
                       ..strokeWidth = 3
                       ..color = Color.fromARGB(255, 218, 96, 198)!,
                   ),
-                  strutStyle: StrutStyle(fontWeight: FontWeight.bold)),
+                  strutStyle: const StrutStyle(fontWeight: FontWeight.bold)),
             )
           : Column(children: [
               Container(
@@ -125,24 +125,19 @@ class _OfferTabScreenState extends State<OfferTabScreen> {
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                 ),
-                                /*Text(
+                                Text(
                                   itemList[index].itemName.toString(),
                                   style: const TextStyle(fontSize: 20),
-                                ),*/
-                                SizedBox(
-                                  height: 5,
                                 ),
                                 Text(
                                   itemList[index].itemType.toString(),
-                                  style: const TextStyle(fontSize: 20),
+                                  style: const TextStyle(fontSize: 15),
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                /*Text(
-                                  "RM ${double.parse(itemList[index].itemPrice.toString()).toStringAsFixed(2)}",
-                                  style: const TextStyle(fontSize: 14),
-                                ),*/
+
+                                // Text(
+                                //   "RM ${double.parse(itemList[index].itemPrice.toString()).toStringAsFixed(2)}",
+                                //    style: const TextStyle(fontSize: 14),
+                                //  ),
                                 Text(
                                   "${itemList[index].itemQty} available",
                                   style: const TextStyle(fontSize: 14),
