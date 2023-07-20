@@ -15,41 +15,41 @@ if (isset($_POST['pageno'])){
 }
 $page_first_result = ($pageno - 1) * $results_per_page;
 
-if (isset($_POST['cartuserid'])){
-	$cartuserid = $_POST['cartuserid'];
+if (isset($_POST['wishlistuserid'])){
+	$wishlistuserid = $_POST['wishlistuserid'];
 }else{
-	$cartuserid = '0';
+	$wishlistuserid = '0';
 }
 
 if (isset($_POST['userid'])){
 	$userid = $_POST['userid'];	
 	$sqlloaditems = "SELECT * FROM `tbl_items` WHERE user_id = '$userid'";
-	$sqlcart = "SELECT * FROM `tbl_carts` WHERE user_id = '$userid'";
+	$sqlwishlist = "SELECT * FROM `tbl_wishlists` WHERE user_id = '$userid'";
 }else if (isset($_POST['search'])){
 	$search = $_POST['search'];
 	$sqlloaditems = "SELECT * FROM `tbl_items` WHERE item_name LIKE '%$search%' 
 			 OR item_type LIKE '%$search%' 
 			 OR item_state LIKE '%$search%' 
 			 OR item_locality LIKE '%$search%'";
-	$sqlcart = "SELECT * FROM `tbl_carts` WHERE user_id = '$cartuserid'";
+	$sqlwishlist = "SELECT * FROM `tbl_wishlists` WHERE user_id = '$wishlistuserid'";
 }else{
 	$sqlloaditems = "SELECT * FROM `tbl_items`";
-	$sqlcart = "SELECT * FROM `tbl_carts` WHERE user_id = '$cartuserid'";
+	$sqlwishlist = "SELECT * FROM `tbl_wishlists` WHERE user_id = '$wishlistuserid'";
 }
 
-if (isset($sqlcart)){
-	$resultcart = $conn->query($sqlcart);
-	$number_of_result_cart = $resultcart->num_rows;
-	if ($number_of_result_cart > 0) {
-		$totalcart = 0;
-		while ($rowcart = $resultcart->fetch_assoc()) {
-			$totalcart = $totalcart+ $rowcart['cart_qty'];
+if (isset($sqlwishlist)){
+	$resultwishlist = $conn->query($sqlwishlist);
+	$number_of_result_wishlist = $resultwishlist->num_rows;
+	if ($number_of_result_wishlist > 0) {
+		$totalwishlist = 0;
+		while ($rowwishlist = $resultwishlist->fetch_assoc()) {
+			$totalwishlist = $totalwishlist+ $rowwishlist['wishlist_qty'];
 		}
 	}else{
-		$totalcart = 0;
+		$totalwishlist = 0;
 	}
 }else{
-	$totalcart = 0;
+	$totalwishlist = 0;
 }
 
 $result = $conn->query($sqlloaditems);
@@ -68,7 +68,6 @@ if ($result->num_rows > 0) {
         $itemlist['item_name'] = $row['item_name'];
         $itemlist['item_type'] = $row['item_type'];
         $itemlist['item_desc'] = $row['item_desc'];
-	//$itemlist['item_price'] = $row['item_price'];
         $itemlist['item_qty'] = $row['item_qty'];
         $itemlist['item_lat'] = $row['item_lat'];
         $itemlist['item_long'] = $row['item_long'];
@@ -77,7 +76,7 @@ if ($result->num_rows > 0) {
 	$itemlist['item_date'] = $row['item_date'];
         array_push($items["items"],$itemlist);
     }
-     $response = array('status' => 'success', 'data' => $items, 'numofpage'=>"$number_of_page",'numberofresult'=>"$number_of_result", 'cartqty'=> $totalcart);
+     $response = array('status' => 'success', 'data' => $items, 'numofpage'=>"$number_of_page",'numberofresult'=>"$number_of_result", 'wishlistqty'=> $totalwishlist);
     sendJsonResponse($response);
 }else{
      $response = array('status' => 'failed', 'data' => null);
