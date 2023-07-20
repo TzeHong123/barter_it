@@ -1,11 +1,11 @@
-import 'package:barter_it/views/screens/Offertabscreen.dart';
+//import 'package:barter_it/views/screens/OfferTab/Offertabscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:barter_it/views/screens/profiletabscreen.dart';
-import 'package:barter_it/views/screens/Searchtabscreen.dart';
+import 'package:barter_it/views/screens/ProfileTab/profiletabscreen.dart';
+import 'package:barter_it/views/screens/SearchTab/Searchtabscreen.dart';
 
 import '../../models/user.dart';
-import 'Offertabscreen.dart';
-import 'Chattabscreen.dart';
+import 'InventoryTab/Inventorytabscreen.dart';
+import 'ChatTab/Chattabscreen.dart';
 
 //Main screen
 
@@ -55,9 +55,9 @@ class _MainScreenState extends State<MainScreen> {
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.add_box_outlined,
+                  Icons.inventory,
                 ),
-                label: "Offer"),
+                label: "Inventory"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.search,

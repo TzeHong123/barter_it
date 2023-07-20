@@ -7,8 +7,8 @@ import 'package:barter_it/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:barter_it/models/item.dart';
 import 'package:barter_it/myconfig.dart';
-
-import 'BuyerCartScreen.dart';
+import 'WishlistScreen.dart';
+import 'BarterRecordScreen.dart';
 import 'SearchDetailsScreen.dart';
 
 // for searching or browsing items available to trade
@@ -30,7 +30,7 @@ class _SearchTabScreenState extends State<SearchTabScreen> {
   int numofpage = 1, curpage = 1;
   int numberofresult = 0;
   var color;
-  int cartqty = 0;
+  int wishlistqty = 0;
 
   TextEditingController searchController = TextEditingController();
 
@@ -75,26 +75,56 @@ class _SearchTabScreenState extends State<SearchTabScreen> {
                 showsearchDialog();
               },
               icon: const Icon(Icons.search)),
-          // TextButton.icon(
-          //   icon: const Icon(
-          //     color: Colors.white,
-          //     Icons.shopping_cart_checkout_outlined,
-          //   ), // Your icon here
-          //   label: Text(cartqty.toString()), // Your text here
-          //   onPressed: () {
-          //     if (cartqty > 0) {
-          //       Navigator.push(
-          //       context,
-          //           MaterialPageRoute(
-          //               builder: (content) => BuyerCartScreen(
-          //                     user: widget.user,
-          //                   )));
-          //     } else {
-          //       ScaffoldMessenger.of(context).showSnackBar(
-          //           const SnackBar(content: Text("No item in cart")));
-          //     }
-          //   },
-          // )
+          TextButton.icon(
+            icon: const Icon(
+              color: Colors.white,
+              Icons.shopping_cart_outlined,
+            ), // Your icon here
+            label: Text(wishlistqty.toString()), // Your text here
+            onPressed: () {
+              if (wishlistqty > 0) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (content) => WishlistScreen(
+                              user: widget.user,
+                            )));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("No item in wishlist")));
+              }
+            },
+          ),
+          PopupMenuButton(
+              // add icon, by default "3 dot" icon
+              // icon: Icon(Icons.book)
+              itemBuilder: (context) {
+            return [
+              const PopupMenuItem<int>(
+                value: 0,
+                child: Text("My Barter Request"),
+              ),
+              // const PopupMenuItem<int>(
+              //   value: 1,
+              //   child: Text("New"),
+              // ),
+            ];
+          }, onSelected: (value) async {
+            if (value == 0) {
+              if (widget.user.id.toString() == "na") {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please login/register an account")));
+                return;
+              }
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (content) => BarterRecordScreen(
+                            user: widget.user,
+                          )));
+            } else if (value == 1) {
+            } else if (value == 2) {}
+          }),
         ],
       ),
       body: itemList.isEmpty
@@ -146,7 +176,7 @@ class _SearchTabScreenState extends State<SearchTabScreen> {
                                   width: screenWidth,
                                   fit: BoxFit.cover,
                                   imageUrl:
-                                      "${MyConfig().SERVER}/barter_it/assets/items/${itemList[index].itemId}.png",
+                                      "${MyConfig().SERVER}/barter_it/assets/items/${itemList[index].itemId}_Image1.png",
                                   placeholder: (context, url) =>
                                       const LinearProgressIndicator(),
                                   errorWidget: (context, url, error) =>
@@ -205,7 +235,7 @@ class _SearchTabScreenState extends State<SearchTabScreen> {
     //print(pageno);
     http.post(Uri.parse("${MyConfig().SERVER}/barter_it/php/load_items.php"),
         body: {
-          "cartuserid": widget.user.id,
+          "wishlistuserid": widget.user.id,
           "pageno": pageno.toString()
         }).then((response) {
       //print(response.body);
@@ -220,8 +250,8 @@ class _SearchTabScreenState extends State<SearchTabScreen> {
           numberofresult = int.parse(jsondata['numberofresult']);
           print(numberofresult);
           var extractdata = jsondata['data'];
-          cartqty = int.parse(jsondata['cartqty'].toString());
-          print(cartqty);
+          wishlistqty = int.parse(jsondata['wishlistqty'].toString());
+          print(wishlistqty);
 
           //Items that are loaded assigned to the list array
           extractdata['items'].forEach((v) {
@@ -301,7 +331,7 @@ class _SearchTabScreenState extends State<SearchTabScreen> {
   void searchItem(String search) {
     http.post(Uri.parse("${MyConfig().SERVER}/barter_it/php/load_items.php"),
         body: {
-          "cartuserid": widget.user.id,
+          "wishlistuserid": widget.user.id,
           "search": search
         }).then((response) {
       //print(response.body);

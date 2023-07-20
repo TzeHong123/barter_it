@@ -6,8 +6,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:barter_it/models/item.dart';
 import 'package:http/http.dart' as http;
 import 'package:barter_it/myconfig.dart';
-import 'edititemscreen.dart';
+import 'EditItemScreen.dart';
 import 'AddNewItemscreen.dart';
+import 'TradeRequestScreen.dart';
 //import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 //for Offer screen
@@ -62,6 +63,38 @@ class _OfferTabScreenState extends State<OfferTabScreen> {
           ),
           strutStyle: const StrutStyle(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          PopupMenuButton(
+              // add icon, by default "3 dot" icon
+              // icon: Icon(Icons.book)
+              itemBuilder: (context) {
+            return [
+              const PopupMenuItem<int>(
+                value: 0,
+                child: Text("Trade Requests"),
+              ),
+              // const PopupMenuItem<int>(
+              //   value: 1,
+              //   child: Text("New"),
+              // ),
+            ];
+          }, onSelected: (value) async {
+            if (value == 0) {
+              if (widget.user.id.toString() == "na") {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Please login/register an account")));
+                return;
+              }
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (content) => TradeRequestScreen(
+                            user: widget.user,
+                          )));
+            } else if (value == 1) {
+            } else if (value == 2) {}
+          }),
+        ],
       ),
       body: itemList.isEmpty
           ? Center(
@@ -119,7 +152,7 @@ class _OfferTabScreenState extends State<OfferTabScreen> {
                                   width: screenWidth,
                                   fit: BoxFit.cover,
                                   imageUrl:
-                                      "${MyConfig().SERVER}/barter_it/assets/items/${itemList[index].itemId}.png",
+                                      "${MyConfig().SERVER}/barter_it/assets/items/${itemList[index].itemId}_Image1.png",
                                   placeholder: (context, url) =>
                                       const LinearProgressIndicator(),
                                   errorWidget: (context, url, error) =>

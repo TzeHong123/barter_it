@@ -7,7 +7,7 @@ import 'package:barter_it/models/item.dart';
 import 'package:barter_it/models/user.dart';
 import 'package:barter_it/myconfig.dart';
 import 'package:http/http.dart' as http;
-import 'package:carousel_slider/carousel_slider.dart';
+//import 'package:carousel_slider/carousel_slider.dart';
 
 class SearchDetailsScreen extends StatefulWidget {
   final Item useritem;
@@ -58,7 +58,7 @@ class _SearchDetailsScreenState extends State<SearchDetailsScreen> {
                     width: screenWidth,
                     fit: BoxFit.cover,
                     imageUrl:
-                        "${MyConfig().SERVER}/barter_it/assets/items/${widget.useritem.itemId}.png",
+                        "${MyConfig().SERVER}/barter_it/assets/items/${widget.useritem.itemId}_Image1.png",
                     placeholder: (context, url) =>
                         const LinearProgressIndicator(),
                     errorWidget: (context, url, error) =>
@@ -223,7 +223,7 @@ class _SearchDetailsScreenState extends State<SearchDetailsScreen> {
           //style: ButtonStyle(),
           child: const Text("Add to Barter Wishlist"),
           onPressed: () {
-            //addToWishListDialog();
+            addToWishListDialog();
           },
         )
       ]),
@@ -231,9 +231,14 @@ class _SearchDetailsScreenState extends State<SearchDetailsScreen> {
   }
 
   void addToWishListDialog() {
+    if (widget.user.id.toString() == "na") {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Please register an account to add item to wishlist")));
+      return;
+    }
     if (widget.user.id.toString() == widget.useritem.userId.toString()) {
       ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("User cannot add own item")));
+          const SnackBar(content: Text("Not allowed to add own item")));
       return;
     }
     showDialog(
@@ -274,28 +279,28 @@ class _SearchDetailsScreenState extends State<SearchDetailsScreen> {
   }
 
   void addtowishlist() {
-    http.post(Uri.parse("${MyConfig().SERVER}/barter_it/php/addtocart.php"),
+    http.post(Uri.parse("${MyConfig().SERVER}/barter_it/php/addtowishlist.php"),
         body: {
           "item_id": widget.useritem.itemId.toString(),
-          "cart_qty": userqty.toString(),
-          "cart_price": totalprice.toString(),
+          "wishlist_qty": userqty.toString(),
+          "wishlist_price": totalprice.toString(),
           "userid": widget.user.id,
-          "sellerid": widget.useritem.userId
+          "ownerid": widget.useritem.userId
         }).then((response) {
       print(response.body);
       if (response.statusCode == 200) {
         var jsondata = jsonDecode(response.body);
         if (jsondata['status'] == 'success') {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text("Success")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Item added to your wishlist")));
         } else {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text("Failed")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Failed to add item")));
         }
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(content: Text("Failed")));
+            .showSnackBar(const SnackBar(content: Text("Failed to add item")));
         Navigator.pop(context);
       }
     });

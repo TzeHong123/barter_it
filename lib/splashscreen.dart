@@ -40,20 +40,20 @@ class SplashScreenState extends State<SplashScreen> {
                 image: DecorationImage(
                     image: AssetImage('assets/images/splash.png'),
                     fit: BoxFit.cover))),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Barter It!",
                 style: TextStyle(
                     fontSize: 48,
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
               ),
-              const CircularProgressIndicator(),
-              const Text(
+              CircularProgressIndicator(),
+              Text(
                 "Version 1.2",
                 style: TextStyle(
                     fontSize: 24,
